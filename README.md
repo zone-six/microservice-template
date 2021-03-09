@@ -1,5 +1,11 @@
 # Zone Six Microservice Template
 
+## Usage
+- Clone and remove git history
+- Find and replace "microservice-template" with name of your service
+- Delete whatever example code you don't need
+- Init git
+
 ## Architecture
 
 - All microservices should follow the architectural patterns laid out in the book [Righting Software](https://www.amazon.com/Righting-Software-Juval-L%C3%B6wy/dp/0136524036).
@@ -48,6 +54,12 @@
 
 - A service may also publish a package or library that will help other services to interact with it. This may be a client library for calling its REST or GraphQL endpoints or middleware that runs pre or post http call.
 - Thought: For PubSub, instead of each service building its own client, a service could publish a package that has a method that takes a call back for each subject that it publishes a message to. This method could take care of the subscribing and unmarshalling of the encoded message, which could/should result in better type safety.
+
+## Configuration
+- Configuration should be handled using environment vars (see the internal/config folder)
+
+## File Storage
+- If file storage is needed, it is acceptable to read and write from disk. When running in containers, these paths should map to a mounted volume so that storage will be persisted.
 
 ## Middleware
 - CorrelationID middleware
