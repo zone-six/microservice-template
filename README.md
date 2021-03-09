@@ -69,6 +69,3 @@
 
 ## TODO: 
 - If more than one server (e.g. jobs, REST, etc.) need to look at multiple docker files and builds.
-- Write a generic pub/sub utility that can be imported and used in the utilities container
-  - Utility will need to read from an options types and connect to NATS
-  - Need to think about this a little more, as we'd probably like to keep just one connection to NATS.

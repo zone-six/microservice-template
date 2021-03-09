@@ -22,12 +22,17 @@ var (
 
 // Config for the environment
 type Config struct {
-	Debug              bool   `envconfig:"DEBUG"`
-	Stage              string `envconfig:"STAGE" default:"dev"`
-	Branch             string `envconfig:"BRANCH"`
-	Port               string `envconfig:"PORT" default:"8080"`
-	PGConnectionString string `envconfig:"PGCONNECTIONSTRING"`
-	DbSecrets          string `envconfig:"DB_SECRET"`
+	Debug                  bool   `envconfig:"DEBUG"`
+	Stage                  string `envconfig:"STAGE" default:"dev"`
+	Branch                 string `envconfig:"BRANCH"`
+	Port                   string `envconfig:"PORT" default:"8080"`
+	PGConnectionString     string `envconfig:"PGCONNECTIONSTRING"`
+	DbSecrets              string `envconfig:"DB_SECRET"`
+	NatsStreamingClusterID string `envconfig:"NATS_STREAMING_CLUSTER_ID"`
+	NatsStreamingClientID  string `envconfig:"NATS_STREAMING_CLIENT_ID"`
+	NatsCertFile           string `envconfig:"NATS_CERT_FILE"`
+	NatsKeyFile            string `envconfig:"NATS_KEY_FILE"`
+	NatsURL                string `envconfig:"NATS_URL"`
 }
 
 // DBSecrets for the DB
