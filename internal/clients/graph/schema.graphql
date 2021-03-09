@@ -1,0 +1,10 @@
+type Athlete {
+    id: ID!
+    email: String!
+    firstName: String
+    lastName: String
+}
+
+type Query {
+  getAthlete: Athlete
+}
