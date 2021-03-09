@@ -3,7 +3,8 @@
 package microservice
 
 const (
-	// SubjectNewUser is the subject under which new user messages will be published. Message type is NewUser.
+	// SubjectNewUser is the subject under which new user messages will be published.
+	// Message type is microservice.NewUser.
 	SubjectNewUser = "zone-six.user.new"
 )
 
