@@ -65,3 +65,6 @@
 - CorrelationID middleware
 - UserContext middleware
 - API key validation
+
+## TODO: 
+- If more than one server (e.g. jobs, REST, etc.) need to look at multiple docker files and builds.
