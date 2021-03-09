@@ -1,4 +1,4 @@
-package server
+package main
 
 import (
 	"fmt"
@@ -70,6 +70,7 @@ func (a *App) Run() {
 
 	// Register client handlers here
 	a.Clients.Graph.RegisterHandlers(r)
+	a.Clients.Rest.RegisterHandlers(r)
 
 	err := http.ListenAndServe(fmt.Sprintf(":%s", port), r)
 	if err != nil {

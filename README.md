@@ -42,7 +42,8 @@
   - Jobs client that runs background processes.
     - Note: If performance and uptime are key, it may be best to have a separate main.go and build pipeline for the jobs portion of the service, so that running jobs won't impact the performance of a service
   - REST/GraphQL client for accepting incoming web traffic.
-- In general, clients should be kept light weight, calling into a manager to perform any sort of business logic.
+- In general, clients should be kept lightweight, calling into a manager to perform any sort of business logic.
+- Public facing clients (REST, GraphQL, etc.) should be well documented, using some sort of lightweight client or a published document (e.g. Swagger, GraphQL playground)
 
 ## Authentication/Authorization
 
@@ -68,3 +69,6 @@
 
 ## TODO: 
 - If more than one server (e.g. jobs, REST, etc.) need to look at multiple docker files and builds.
+- Write a generic pub/sub utility that can be imported and used in the utilities container
+  - Utility will need to read from an options types and connect to NATS
+  - Need to think about this a little more, as we'd probably like to keep just one connection to NATS.

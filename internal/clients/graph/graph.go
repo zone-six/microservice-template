@@ -30,7 +30,6 @@ func (c *graphClient) RegisterHandlers(r *mux.Router) {
 	gqlConfig := generated.Config{Resolvers: &Resolver{Managers: c.managers}}
 	srv := handler.NewDefaultServer(generated.NewExecutableSchema(gqlConfig))
 	graph := r.PathPrefix("/graphql").Subrouter()
-	//TODO: Don't show the playground when in prod
 	if c.config.Stage != "prod" {
 		graph.Handle("", playground.Handler("GraphQL playground", "/graphql/query"))
 	}
