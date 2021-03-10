@@ -63,6 +63,8 @@ func (a *App) Run() {
 
 	// Listen for shutdown signals.
 	go a.listenForSignals()
+	// Start any subscriptions
+	a.Clients.PubSub.RegisterSubscriptions()
 
 	r := mux.NewRouter()
 
@@ -105,6 +107,9 @@ func (a *App) signalHandler(signal os.Signal) {
 	default:
 		fmt.Println("- unknown signal")
 	}
+
+	// Cleanup any subscriptions.
+	a.Clients.PubSub.CleanUp()
 
 	fmt.Println("\nFinishing server cleanup")
 	os.Exit(0)

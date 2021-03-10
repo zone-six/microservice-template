@@ -20,9 +20,10 @@ require (
 	github.com/joho/godotenv v1.3.0
 	github.com/kelseyhightower/envconfig v1.4.0
 	github.com/nats-io/jwt v1.2.2 // indirect
+	github.com/nats-io/stan.go v0.8.3
 	github.com/pkg/errors v0.9.1
 	github.com/rs/zerolog v1.20.0
 	github.com/stretchr/testify v1.7.0
 	github.com/vektah/gqlparser/v2 v2.1.0
-	github.com/zone-six/pubsub-utility v0.0.0-20210309204503-76cf353762a8
+	github.com/zone-six/pubsub-utility v0.0.0-20210310154224-9ff066f183ea
 )
