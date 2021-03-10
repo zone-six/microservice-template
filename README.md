@@ -1,12 +1,28 @@
 # Zone Six Microservice Template
 
 ## Usage
-- Clone and remove git history
+```bash
+git clone https://github.com/zone-six/microservice-template.git <service-name>
+rm -rf .git
+git init
+git add .
+git commit -m "Initial commit"
+git branch -m main
+```
 - Find and replace "microservice-template" with name of your service
 - Delete whatever example code you don't need
 - Init git
 - Update database name in make file
 - Update .env file
+- Make sure everything builds and runs
+
+```bash
+git init
+git add .
+git commit -m "Initial commit"
+git branch -m main
+```
+- Create repo in github and push your code.
 
 ## Architecture
 
