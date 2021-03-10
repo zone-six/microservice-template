@@ -586,6 +586,10 @@ github.com/yuin/goldmark v1.2.1/go.mod h1:3hX8gzYuyVAZsxl0MRgGTJEmQBFcNTphYh9dec
 github.com/zenazn/goji v0.9.0/go.mod h1:7S9M489iMyHBNxwZnk9/EHS098H4/F6TATF2mIxtB1Q=
 github.com/zone-six/pubsub-utility v0.0.0-20210310154224-9ff066f183ea h1:ClmKhiv0TlQO4WerFDeOBhskxDD2PHSC1HKL5Tdqano=
 github.com/zone-six/pubsub-utility v0.0.0-20210310154224-9ff066f183ea/go.mod h1:ACb95BQujgp+oAkfGIaS0vRDCN7pjyFfQb6n8ruqNxY=
+github.com/zone-six/pubsub-utility v0.0.0-20210310171905-2f59bc19d505 h1:sRVsyMWNAYU0YtyLFSlf5J1a3TluSaf0cYRQYi931gw=
+github.com/zone-six/pubsub-utility v0.0.0-20210310171905-2f59bc19d505/go.mod h1:ACb95BQujgp+oAkfGIaS0vRDCN7pjyFfQb6n8ruqNxY=
+github.com/zone-six/pubsub-utility v0.0.0-20210310182709-f29cd3357725 h1:Fa0orO3donMrVxzye5M3EHkrC+68AKXSRR7yPb7V4+w=
+github.com/zone-six/pubsub-utility v0.0.0-20210310182709-f29cd3357725/go.mod h1:ACb95BQujgp+oAkfGIaS0vRDCN7pjyFfQb6n8ruqNxY=
 gitlab.com/nyarla/go-crypt v0.0.0-20160106005555-d9a5dc2b789b/go.mod h1:T3BPAOm2cqquPa0MKWeNkmOM5RQsRhkrwMWonFMN7fE=
 go.etcd.io/bbolt v1.3.5 h1:XAzx9gjCb0Rxj7EoqcClPD1d5ZBxZJk0jbuoPHenBt0=
 go.etcd.io/bbolt v1.3.5/go.mod h1:G5EMThwa9y8QZGBClrRx5EY+Yw9kAhnjy3bSjsnlVTQ=

@@ -43,8 +43,9 @@ func main() {
 
 // App represents the top level application
 type App struct {
-	config  *config.Config
-	Clients *clients.Container
+	config    *config.Config
+	Clients   *clients.Container
+	Utilities *utilities.Container
 }
 
 // New creates a new instance of the application
@@ -54,7 +55,7 @@ func New(db *sqlx.DB, config *config.Config) *App {
 	engines := engines.New(config, accessors, utilities)
 	managers := managers.New(config, engines, accessors, utilities)
 	clients := clients.New(config, managers, utilities)
-	return &App{config: config, Clients: clients}
+	return &App{config: config, Clients: clients, Utilities: utilities}
 }
 
 // Run starts the app
@@ -110,6 +111,7 @@ func (a *App) signalHandler(signal os.Signal) {
 
 	// Cleanup any subscriptions.
 	a.Clients.PubSub.CleanUp()
+	a.Utilities.CleanUp()
 
 	fmt.Println("\nFinishing server cleanup")
 	os.Exit(0)

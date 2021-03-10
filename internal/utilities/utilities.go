@@ -23,3 +23,8 @@ func New(cfg *config.Config) *Container {
 		PubSub: pubsub.NewPubSubUtility(pubsubOptions),
 	}
 }
+
+// CleanUp shuts down any open connections
+func (c *Container) CleanUp() {
+	c.PubSub.Close()
+}

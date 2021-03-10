@@ -25,5 +25,5 @@ require (
 	github.com/rs/zerolog v1.20.0
 	github.com/stretchr/testify v1.7.0
 	github.com/vektah/gqlparser/v2 v2.1.0
-	github.com/zone-six/pubsub-utility v0.0.0-20210310154224-9ff066f183ea
+	github.com/zone-six/pubsub-utility v0.0.0-20210310182709-f29cd3357725
 )

@@ -30,8 +30,8 @@ type Config struct {
 	DbSecrets              string `envconfig:"DB_SECRET"`
 	NatsStreamingClusterID string `envconfig:"NATS_STREAMING_CLUSTER_ID"`
 	NatsStreamingClientID  string `envconfig:"NATS_STREAMING_CLIENT_ID"`
-	NatsCertFile           string `envconfig:"NATS_CERT_FILE"`
-	NatsKeyFile            string `envconfig:"NATS_KEY_FILE"`
+	NatsCertFile           string `envconfig:"NATS_CERT_FILE" default:""`
+	NatsKeyFile            string `envconfig:"NATS_KEY_FILE" default:""`
 	NatsURL                string `envconfig:"NATS_URL"`
 }
 
