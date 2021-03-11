@@ -56,5 +56,4 @@ func (c *restClient) RegisterHandlers(r *mux.Router) {
 		var staticFS = http.FS(staticFiles)
 		r.PathPrefix("/swaggerui/").Handler(http.FileServer(staticFS))
 	}
-	// api.Handle("/", api)
 }
