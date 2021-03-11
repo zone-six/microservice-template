@@ -6,3 +6,9 @@ drop_database:
 
 run_server: database
 	go run internal/cmd/server/server.go
+
+generate_rest_client:
+	rm -rf ./internal/clients/rest/restapi ./internal/clients/rest/models 
+	swagger generate server -A identity-api -f ./swagger.yml -t ./internal/clients/rest --template=stratoscale
+	go get -u -f ./internal/clients/rest/...
+	go mod tidy

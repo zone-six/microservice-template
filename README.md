@@ -4,6 +4,7 @@
 ```bash
 git clone https://github.com/zone-six/microservice-template.git <service-name>
 rm -rf .git
+cd <service-name>
 ```
 - Find and replace "microservice-template" with name of your service
 - Delete whatever example code you don't need
