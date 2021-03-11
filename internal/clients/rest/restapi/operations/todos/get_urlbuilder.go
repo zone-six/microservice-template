@@ -40,34 +40,34 @@ func (o *GetURL) SetBasePath(bp string) {
 
 // Build a url path and query string
 func (o *GetURL) Build() (*url.URL, error) {
-	var result url.URL
+	var _result url.URL
 
 	var _path = "/"
 
 	_basePath := o._basePath
-	result.Path = golangswaggerpaths.Join(_basePath, _path)
+	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 
 	qs := make(url.Values)
 
-	var limit string
+	var limitQ string
 	if o.Limit != nil {
-		limit = swag.FormatInt32(*o.Limit)
+		limitQ = swag.FormatInt32(*o.Limit)
 	}
-	if limit != "" {
-		qs.Set("limit", limit)
+	if limitQ != "" {
+		qs.Set("limit", limitQ)
 	}
 
-	var since string
+	var sinceQ string
 	if o.Since != nil {
-		since = swag.FormatInt64(*o.Since)
+		sinceQ = swag.FormatInt64(*o.Since)
 	}
-	if since != "" {
-		qs.Set("since", since)
+	if sinceQ != "" {
+		qs.Set("since", sinceQ)
 	}
 
-	result.RawQuery = qs.Encode()
+	_result.RawQuery = qs.Encode()
 
-	return &result, nil
+	return &_result, nil
 }
 
 // Must is a helper function to panic when the url builder returns an error

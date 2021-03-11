@@ -8,7 +8,7 @@ package todos
 import (
 	"net/http"
 
-	middleware "github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/runtime/middleware"
 )
 
 // GetHandlerFunc turns a function with the right signature into a get handler
@@ -29,7 +29,7 @@ func NewGet(ctx *middleware.Context, handler GetHandler) *Get {
 	return &Get{Context: ctx, Handler: handler}
 }
 
-/*Get swagger:route GET / todos get
+/* Get swagger:route GET / todos get
 
 Get get API
 
@@ -45,14 +45,12 @@ func (o *Get) ServeHTTP(rw http.ResponseWriter, r *http.Request) {
 		r = rCtx
 	}
 	var Params = NewGetParams()
-
 	if err := o.Context.BindValidRequest(r, route, &Params); err != nil { // bind params
 		o.Context.Respond(rw, r, route.Produces, route, err)
 		return
 	}
 
 	res := o.Handler.Handle(Params) // actually handle the request
-
 	o.Context.Respond(rw, r, route.Produces, route, res)
 
 }

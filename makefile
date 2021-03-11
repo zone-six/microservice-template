@@ -9,6 +9,6 @@ run_server: database
 
 generate_rest_client:
 	rm -rf ./internal/clients/rest/restapi ./internal/clients/rest/models 
-	swagger generate server -A identity-api -f ./swagger.yml -t ./internal/clients/rest --template=stratoscale
+	swagger generate server -A todo-api -f ./swagger.yml -t ./internal/clients/rest --template=stratoscale
 	go get -u -f ./internal/clients/rest/...
 	go mod tidy

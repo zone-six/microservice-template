@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	models "github.com/zone-six/microservice-template/internal/clients/rest/models"
+	"github.com/zone-six/microservice-template/internal/clients/rest/models"
 )
 
 // UpdateOneOKCode is the HTTP code returned for type UpdateOneOK

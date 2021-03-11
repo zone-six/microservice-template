@@ -10,7 +10,7 @@ import (
 
 	"github.com/go-openapi/runtime"
 
-	models "github.com/zone-six/microservice-template/internal/clients/rest/models"
+	"github.com/zone-six/microservice-template/internal/clients/rest/models"
 )
 
 // GetOKCode is the HTTP code returned for type GetOK
@@ -51,13 +51,13 @@ func (o *GetOK) WriteResponse(rw http.ResponseWriter, producer runtime.Producer)
 	rw.WriteHeader(200)
 	payload := o.Payload
 	if payload == nil {
+		// return empty array
 		payload = make([]*models.Item, 0, 50)
 	}
 
 	if err := producer.Produce(rw, payload); err != nil {
 		panic(err) // let the recovery middleware deal with this
 	}
-
 }
 
 /*GetDefault generic error response

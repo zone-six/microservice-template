@@ -11,9 +11,8 @@ import (
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
-
-	strfmt "github.com/go-openapi/strfmt"
 )
 
 // NewGetParams creates a new GetParams object
@@ -71,7 +70,6 @@ func (o *GetParams) BindRequest(r *http.Request, route *middleware.MatchedRoute)
 	if err := o.bindSince(qSince, qhkSince, route.Formats); err != nil {
 		res = append(res, err)
 	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
@@ -87,6 +85,7 @@ func (o *GetParams) bindLimit(rawData []string, hasKey bool, formats strfmt.Regi
 
 	// Required: false
 	// AllowEmptyValue: false
+
 	if raw == "" { // empty values pass all other validations
 		// Default values have been previously initialized by NewGetParams()
 		return nil
@@ -110,6 +109,7 @@ func (o *GetParams) bindSince(rawData []string, hasKey bool, formats strfmt.Regi
 
 	// Required: false
 	// AllowEmptyValue: false
+
 	if raw == "" { // empty values pass all other validations
 		return nil
 	}

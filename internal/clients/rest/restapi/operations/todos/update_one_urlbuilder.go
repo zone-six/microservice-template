@@ -40,7 +40,7 @@ func (o *UpdateOneURL) SetBasePath(bp string) {
 
 // Build a url path and query string
 func (o *UpdateOneURL) Build() (*url.URL, error) {
-	var result url.URL
+	var _result url.URL
 
 	var _path = "/{id}"
 
@@ -48,13 +48,13 @@ func (o *UpdateOneURL) Build() (*url.URL, error) {
 	if id != "" {
 		_path = strings.Replace(_path, "{id}", id, -1)
 	} else {
-		return nil, errors.New("ID is required on UpdateOneURL")
+		return nil, errors.New("id is required on UpdateOneURL")
 	}
 
 	_basePath := o._basePath
-	result.Path = golangswaggerpaths.Join(_basePath, _path)
+	_result.Path = golangswaggerpaths.Join(_basePath, _path)
 
-	return &result, nil
+	return &_result, nil
 }
 
 // Must is a helper function to panic when the url builder returns an error

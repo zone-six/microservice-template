@@ -8,16 +8,14 @@ import (
 	"fmt"
 	"net/http"
 
-	"github.com/Stratoscale/swagger/query"
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/loads"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/runtime/security"
 
 	"github.com/zone-six/microservice-template/internal/clients/rest/restapi/operations"
 	"github.com/zone-six/microservice-template/internal/clients/rest/restapi/operations/todos"
-
-	models "github.com/zone-six/microservice-template/internal/clients/rest/models"
 )
 
 type contextKey string
@@ -26,11 +24,14 @@ const AuthKey contextKey = "Auth"
 
 //go:generate mockery -name TodosAPI -inpkg
 
-// TodosAPI
+/* TodosAPI  */
 type TodosAPI interface {
 	Get(ctx context.Context, params todos.GetParams) middleware.Responder
+
 	AddOne(ctx context.Context, params todos.AddOneParams) middleware.Responder
+
 	DestroyOne(ctx context.Context, params todos.DestroyOneParams) middleware.Responder
+
 	UpdateOne(ctx context.Context, params todos.UpdateOneParams) middleware.Responder
 }
 
@@ -45,18 +46,43 @@ type Config struct {
 	// Authorizer is used to authorize a request after the Auth function was called using the "Auth*" functions
 	// and the principal was stored in the context in the "AuthKey" context value.
 	Authorizer func(*http.Request) error
+
+	// Authenticator to use for all APIKey authentication
+	APIKeyAuthenticator func(string, string, security.TokenAuthentication) runtime.Authenticator
+	// Authenticator to use for all Bearer authentication
+	BasicAuthenticator func(security.UserPassAuthentication) runtime.Authenticator
+	// Authenticator to use for all Basic authentication
+	BearerAuthenticator func(string, security.ScopedTokenAuthentication) runtime.Authenticator
 }
 
 // Handler returns an http.Handler given the handler configuration
 // It mounts all the business logic implementers in the right routing.
 func Handler(c Config) (http.Handler, error) {
+	h, _, err := HandlerAPI(c)
+	return h, err
+}
+
+// HandlerAPI returns an http.Handler given the handler configuration
+// and the corresponding *TodoAPI instance.
+// It mounts all the business logic implementers in the right routing.
+func HandlerAPI(c Config) (http.Handler, *operations.TodoAPIAPI, error) {
 	spec, err := loads.Analyzed(swaggerCopy(SwaggerJSON), "")
 	if err != nil {
-		return nil, fmt.Errorf("analyze swagger: %v", err)
+		return nil, nil, fmt.Errorf("analyze swagger: %v", err)
 	}
-	api := operations.NewTodoListAPI(spec)
+	api := operations.NewTodoAPIAPI(spec)
 	api.ServeError = errors.ServeError
 	api.Logger = c.Logger
+
+	if c.APIKeyAuthenticator != nil {
+		api.APIKeyAuthenticator = c.APIKeyAuthenticator
+	}
+	if c.BasicAuthenticator != nil {
+		api.BasicAuthenticator = c.BasicAuthenticator
+	}
+	if c.BearerAuthenticator != nil {
+		api.BearerAuthenticator = c.BearerAuthenticator
+	}
 
 	api.JSONConsumer = runtime.JSONConsumer()
 	api.JSONProducer = runtime.JSONProducer()
@@ -77,15 +103,8 @@ func Handler(c Config) (http.Handler, error) {
 		return c.TodosAPI.UpdateOne(ctx, params)
 	})
 	api.ServerShutdown = func() {}
-	return api.Serve(c.InnerMiddleware), nil
+	return api.Serve(c.InnerMiddleware), api, nil
 }
-
-// Query parse functions for all the models
-// Those can be used to extract database query from the http path's query string
-var (
-	ErrorQueryParse = query.MustNewBuilder(&query.Config{Model: models.Error{}}).ParseRequest
-	ItemQueryParse  = query.MustNewBuilder(&query.Config{Model: models.Item{}}).ParseRequest
-)
 
 // swaggerCopy copies the swagger json to prevent data races in runtime
 func swaggerCopy(orig json.RawMessage) json.RawMessage {

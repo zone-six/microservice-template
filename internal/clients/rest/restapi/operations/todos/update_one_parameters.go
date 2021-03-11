@@ -6,20 +6,22 @@ package todos
 // Editing this file might prove futile when you re-run the swagger generate command
 
 import (
+	"context"
 	"net/http"
 
 	"github.com/go-openapi/errors"
 	"github.com/go-openapi/runtime"
 	"github.com/go-openapi/runtime/middleware"
+	"github.com/go-openapi/strfmt"
 	"github.com/go-openapi/swag"
+	"github.com/go-openapi/validate"
 
-	strfmt "github.com/go-openapi/strfmt"
-
-	models "github.com/zone-six/microservice-template/internal/clients/rest/models"
+	"github.com/zone-six/microservice-template/internal/clients/rest/models"
 )
 
 // NewUpdateOneParams creates a new UpdateOneParams object
-// no default values defined in spec.
+//
+// There are no default values defined in the spec.
 func NewUpdateOneParams() UpdateOneParams {
 
 	return UpdateOneParams{}
@@ -65,16 +67,21 @@ func (o *UpdateOneParams) BindRequest(r *http.Request, route *middleware.Matched
 				res = append(res, err)
 			}
 
+			ctx := validate.WithOperationRequest(context.Background())
+			if err := body.ContextValidate(ctx, route.Formats); err != nil {
+				res = append(res, err)
+			}
+
 			if len(res) == 0 {
 				o.Body = &body
 			}
 		}
 	}
+
 	rID, rhkID, _ := route.Params.GetOK("id")
 	if err := o.bindID(rID, rhkID, route.Formats); err != nil {
 		res = append(res, err)
 	}
-
 	if len(res) > 0 {
 		return errors.CompositeValidationError(res...)
 	}
