@@ -34,7 +34,6 @@ var staticFiles embed.FS
 
 func (c *restClient) RegisterHandlers(r *mux.Router) {
 	// TODO: Will need to do some work if you want to serve swagger and api under a subrouter.
-	api := r.PathPrefix("/").Subrouter()
 
 	// Initiate the http handler, with the objects that are implementing the business logic.
 	h, err := restapi.Handler(restapi.Config{
@@ -44,7 +43,6 @@ func (c *restClient) RegisterHandlers(r *mux.Router) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	api.Handle("/", h)
 
 	if c.config.Stage != "prod" {
 		// Note: This should be getting served by the restapi handler, but it's not for some reason
@@ -56,4 +54,6 @@ func (c *restClient) RegisterHandlers(r *mux.Router) {
 		var staticFS = http.FS(staticFiles)
 		r.PathPrefix("/swaggerui/").Handler(http.FileServer(staticFS))
 	}
+	r.PathPrefix("/").Handler(h)
+
 }
